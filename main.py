@@ -1,29 +1,25 @@
 import pickle
 from os import path
 
-NAME_BASE = 'data.pkl'
-print('~ Вас приветствует Список Дел ~')
+BASE_FILE = 'data.pkl'
 
+
+def welcome():
+    print('~ Вас приветствует Список Дел ~')
 
 def create_base():
-    data_base = {
+    base_template = {
         'List_Tasks': ['task 1', 'task 2', 'task 3']
     }
 
-    if not path.exists(NAME_BASE):
-        with open(NAME_BASE, 'wb') as file:
-            pickle.dump(data_base, file)
-
-
-create_base()
+    if not path.exists(BASE_FILE):
+        with open(BASE_FILE, 'wb') as file:
+            pickle.dump(base_template, file)
 
 
 def get_base() -> dict:
-    with open(NAME_BASE, 'rb') as file:
+    with open(BASE_FILE, 'rb') as file:
         return pickle.load(file)
-
-
-print(get_base())
 
 
 def show_menu():
@@ -33,4 +29,9 @@ def show_menu():
     print('q. Выход')
 
 
-show_menu()
+if __name__ == '__main__':
+    create_base()
+    welcome()
+    show_menu()
+    print(get_base())
+    print(__name__)
