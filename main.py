@@ -21,7 +21,7 @@ def show_menu():
 def create_base():
     "Создать файл базы данных"
     template = {
-        'List_Tasks': ['task 1', 'task 2', 'task 3']
+        'List_Tasks': []
     }
 
     if not path.exists(BASE_FILE):
@@ -42,6 +42,9 @@ def save_base(task: str, data: dict):
         pickle.dump(data, file)
 
 
+def check_value(userInput: str) -> bool:
+    return len(userInput) == 1 and userInput in ('1', '2', '3', 'q', 'Q')
+
 # Конструкция if __name__ == '__main__': — это важный идиом в Python, который
 # определяет, выполняется ли файл напрямую или импортируется как модуль.
 if __name__ == '__main__':
@@ -55,4 +58,5 @@ if __name__ == '__main__':
     while True:
         show_menu()
         user_input = input("\nYour Select: ")
-
+        if not check_value(user_input):
+            print('invalid input\n')
