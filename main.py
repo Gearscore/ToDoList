@@ -5,10 +5,12 @@ BASE_FILE = 'data.pkl'
 
 
 def welcome():
-    print('~ You are welcomed by a list of affairs ~')
+    "Приветствие"
+    print('~ You are welcomed by a list of affairs ~\n')
 
 
 def show_menu():
+    "Показать меню"
     print('1. Add the task')
     print('2. A complete list of affairs')
     print('3. Delete the task')
@@ -16,6 +18,7 @@ def show_menu():
 
 
 def create_base():
+    "Создать файл базы данных"
     template = {
         'List_Tasks': ['task 1', 'task 2', 'task 3']
     }
@@ -26,13 +29,18 @@ def create_base():
 
 
 def get_base() -> dict:
+    "Получить данные из файла базы данных"
     with open(BASE_FILE, 'rb') as file:
         return pickle.load(file)
 
 
+# Конструкция if __name__ == '__main__': — это важный идиом в Python, который
+# определяет, выполняется ли файл напрямую или импортируется как модуль.
 if __name__ == '__main__':
     create_base()
-    welcome()
-    show_menu()
     data_base = get_base()
-    print(data_base)
+    welcome()
+
+    while True:
+        show_menu()
+        user_input = input("\nYour Select: ")
