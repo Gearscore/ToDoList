@@ -17,6 +17,7 @@ def show_menu():
     print('q. Exit')
 
 
+
 def create_base():
     "Создать файл базы данных"
     template = {
@@ -28,10 +29,17 @@ def create_base():
             pickle.dump(template, file)
 
 
+
 def get_base() -> dict:
     "Получить данные из файла базы данных"
     with open(BASE_FILE, 'rb') as file:
         return pickle.load(file)
+
+
+def save_base(task: str, data: dict):
+    data['List_Tasks'].append(task)
+    with open(BASE_FILE, 'wb') as file:
+        pickle.dump(data, file)
 
 
 # Конструкция if __name__ == '__main__': — это важный идиом в Python, который
@@ -39,8 +47,12 @@ def get_base() -> dict:
 if __name__ == '__main__':
     create_base()
     data_base = get_base()
+    save_base('сделать зарядку', data_base)
+    data_base = get_base()
+    print(data_base)
     welcome()
 
     while True:
         show_menu()
         user_input = input("\nYour Select: ")
+
