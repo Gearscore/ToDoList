@@ -6,9 +6,9 @@ BASE_FILE = 'data.pkl'
 
 def show_menu():
     "Показать приветствие и меню"
-    print('~ You are welcomed by a list of affairs ~\n')
+    print('~ You are welcomed by a list of tasks ~\n')
     print('1. Add the task')
-    print('2. A complete list of affairs')
+    print('2. A complete list of tasks')
     print('3. Delete the task')
     print('q. Exit')
 
@@ -36,13 +36,14 @@ def get_base() -> dict:
 
 
 def save_base(task: str, data: dict):
+    "Сахранить в файл базы данных"
     data['List_Tasks'].append(task)
     with open(BASE_FILE, 'wb') as file:
         pickle.dump(data, file)
 
 
 def user_input() -> str:
-    "Ввод пользователя"
+    "Ввод пользователя и проверка коректности"
     while True:
         s = input("\nYour Select: ")
         if not (len(s) == 1 and s in ('1', '2', '3', 'q', 'Q')):
