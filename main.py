@@ -43,7 +43,7 @@ def save_base(task: str, data: dict):
 
 
 def user_input() -> str:
-    "Ввод пользователя и проверка коректности"
+    "Ввод пользователя и проверка корректности"
     while True:
         s = input("\nYour Select: ")
         if not (len(s) == 1 and s in ('1', '2', '3', 'q', 'Q')):
