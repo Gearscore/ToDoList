@@ -13,6 +13,11 @@ def show_menu():
     print('q. Exit')
 
 
+def cleaning_screen():
+    "ANSI-коды для очистки экрана"
+    print("\033[H\033[J", end="")
+
+
 def create_base():
     "Создать файл базы данных"
     template = {
@@ -53,5 +58,6 @@ if __name__ == '__main__':
     data_base = get_base()
 
     while True:
+        cleaning_screen()
         show_menu()
         result_input = user_input()
