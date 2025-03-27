@@ -59,6 +59,17 @@ if __name__ == '__main__':
     data_base = get_base()
 
     while True:
-        cleaning_screen()
+        # cleaning_screen()
         show_menu()
         result_input = user_input()
+        match result_input:
+            case "1":
+                pass
+            case "2":
+                pass
+            case "3":
+                pass
+            case "q" | "Q":
+                pass
+            case _:
+                pass
