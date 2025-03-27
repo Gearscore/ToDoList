@@ -4,18 +4,13 @@ from os import path
 BASE_FILE = 'data.pkl'
 
 
-def welcome():
-    "Приветствие"
-    print('~ You are welcomed by a list of affairs ~\n')
-
-
 def show_menu():
-    "Показать меню"
+    "Показать приветствие и меню"
+    print('~ You are welcomed by a list of affairs ~\n')
     print('1. Add the task')
     print('2. A complete list of affairs')
     print('3. Delete the task')
     print('q. Exit')
-
 
 
 def create_base():
@@ -27,7 +22,6 @@ def create_base():
     if not path.exists(BASE_FILE):
         with open(BASE_FILE, 'wb') as file:
             pickle.dump(template, file)
-
 
 
 def get_base() -> dict:
@@ -42,21 +36,22 @@ def save_base(task: str, data: dict):
         pickle.dump(data, file)
 
 
-def check_value(userInput: str) -> bool:
-    return len(userInput) == 1 and userInput in ('1', '2', '3', 'q', 'Q')
+def user_input() -> str:
+    "Ввод пользователя"
+    while True:
+        s = input("\nYour Select: ")
+        if not (len(s) == 1 and s in ('1', '2', '3', 'q', 'Q')):
+            print(f"invalid input not {('1', '2', '3', 'q')}")
+        else:
+            return s
+
 
 # Конструкция if __name__ == '__main__': — это важный идиом в Python, который
 # определяет, выполняется ли файл напрямую или импортируется как модуль.
 if __name__ == '__main__':
     create_base()
     data_base = get_base()
-    save_base('сделать зарядку', data_base)
-    data_base = get_base()
-    print(data_base)
-    welcome()
 
     while True:
         show_menu()
-        user_input = input("\nYour Select: ")
-        if not check_value(user_input):
-            print('invalid input\n')
+        result_input = user_input()
