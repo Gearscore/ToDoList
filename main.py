@@ -109,7 +109,6 @@ def delete_task():
     if 1 <= index_task <= len(list_tasks):
         res = list_tasks.pop(index_task - 1)
         print(f"Delete task - {res}\n")
-
     else:
         print("There is no such task\n")
     save_base(data_base)
