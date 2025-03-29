@@ -70,7 +70,13 @@ def user_input() -> str:
 
 def add_task():
     "сохранение задачи в базе"
-    task = input('Enter The Task: ')
+    while True:
+        task = input('Enter The Task (0-cancel): ')
+        if task == '0':
+            print("The operation is canceled\n")
+            return
+        if len(task) != task.count(" ") and task != "":
+            break
     data_base = get_base()
     data_base['List_Tasks'].append(task)
     save_base(data_base)
@@ -103,21 +109,26 @@ def delete_task():
     show_list_tasks()
     data_base = get_base()
     list_tasks = data_base['List_Tasks']
-    index_task = input("Indicate the number of the deleted task: ")
-    if index_task.isdigit():
-        index_task = int(index_task)
-    else:
-        print("Enter task number")
-        return
-    if not list_tasks:
-        print("Empty\n")
-        return
-    if 1 <= index_task <= len(list_tasks):
-        res = list_tasks.pop(index_task - 1)
-        print(f"Delete task - {res}\n")
-    else:
-        print("There is no such task\n")
-    save_base(data_base)
+    while True:
+        index_task = input("Indicate the number of the deleted task (0-cancel): ")
+        if index_task == "0":
+            print("The operation is canceled\n")
+            return
+        if not list_tasks:
+            print("Empty\n")
+            break
+        if index_task.isdigit():
+            index_task = int(index_task)
+        else:
+            print("Error not is numbers")
+            continue
+        if 1 <= index_task <= len(list_tasks):
+            res = list_tasks.pop(index_task - 1)
+            print(f"Delete task - {res}\n")
+            save_base(data_base)
+        else:
+            print("There is no such task\n")
+
 
 
 # Конструкция if __name__ == '__main__': — это важный идиом в Python, который
