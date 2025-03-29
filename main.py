@@ -100,12 +100,18 @@ def clean_list_tasks():
 
 def delete_task():
     "Удаление задачи"
+    show_list_tasks()
     data_base = get_base()
     list_tasks = data_base['List_Tasks']
-    index_task = int(input("Indicate the number of the deleted task: "))
+    index_task = input("Indicate the number of the deleted task: ")
+    if index_task.isdigit():
+        index_task = int(index_task)
+    else:
+        print("Enter task number")
+        return
     if not list_tasks:
         print("Empty\n")
-
+        return
     if 1 <= index_task <= len(list_tasks):
         res = list_tasks.pop(index_task - 1)
         print(f"Delete task - {res}\n")
